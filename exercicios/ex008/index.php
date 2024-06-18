@@ -9,28 +9,27 @@
 <body>
     <?php 
         // Capturando os dados do Formulário Retroalimentado
-        $dividendo = $_GET["dividendo"] ?? 0;
-        $divisor = $_GET["divisor"] ?? 0;
+        $meuSalario = $_GET["meuSalario"] ?? 0;
     ?>
     <main>
         <h1>Informe seu Salário</h1>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get"> 
 
-            <label for="salario">Salário</label>
-            <input type="number" name="salario" id="salario" step="0.01" value="<?=$salario?>">
-
-            <input type="submit" value="Analisar">
+            <label for="salario">Salário (R$)</label>
+            <input type="number" name="meuSalario" id="meuSalario" step="0.01" value="<?=$meuSalario?>">
+            <p>Considerando o salário mínimo de <strong>R$1.412,00</strong></p>
+            <input type="submit" value="Calcular">
 
         </form>
     </main>
     <section>
-        <h2>Estrutura da Divisão</h2>
+        <h2>Resultado Final</h2>
         <?php
-            $divisao = $dividendo / $divisor;
-            echo "<h1><strong>$dividendo / $divisor = $divisao</strong></h1>";
-            echo "<p>$dividendo ----> $divisor </p>";
-            echo "<p>Quociente da Divisão: " . floor($dividendo / $divisor) . "</p>";
-            echo "<p>Resto da Divisão: " . $dividendo % $divisor . "</p>";
+            $salarioMinimo = 1412;
+            $quantSalariosInt = floor($meuSalario / $salarioMinimo);
+            $restoSalario = $meuSalario % $salarioMinimo;
+            echo "<p>Quem recebe um salário de R$$meuSalario ganha <strong> $quantSalariosInt salários mínimos + </strong> R$$restoSalario </p>";
+            
         ?>
     </section>
 </body>
