@@ -13,7 +13,7 @@
     ?>
     <main>
         <h1>Informe um Número</h1>
-        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get"> 
+        <form action="<?php $_SERVER['PHP_SELF']; ?>" method="get"> 
 
             <label for="numero">Número (R$)</label>
             <input type="number" name="numero" id="numero" value="<?=$numero?>">
