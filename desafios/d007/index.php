@@ -8,8 +8,10 @@
 </head>
 <body>
     <?php 
+        $salarioMinimo = 1_412.00;
         // Capturando os dados do Formulário Retroalimentado
-        $meuSalario = $_GET["meuSalario"] ?? 0;
+        $meuSalario = $_GET["meuSalario"] ?? $salarioMinimo;
+        
     ?>
     <main>
         <h1>Informe seu Salário</h1>
@@ -17,7 +19,7 @@
 
             <label for="salario">Salário (R$)</label>
             <input type="number" name="meuSalario" id="meuSalario" step="0.01" value="<?=$meuSalario?>">
-            <p>Considerando o salário mínimo de <strong>R$1.412,00</strong></p>
+            <p>Considerando o salário mínimo de <strong><?=number_format($salarioMinimo, 2, ',', '.')?></strong></p>
             <input type="submit" value="Calcular">
 
         </form>
@@ -25,8 +27,8 @@
     <section>
         <h2>Resultado Final</h2>
         <?php
-            $salarioMinimo = 1412;
-            $quantSalariosInt = floor($meuSalario / $salarioMinimo);
+            
+            $quantSalariosInt = intdiv($meuSalario, $salarioMinimo);
             $restoSalario = $meuSalario % $salarioMinimo;
             echo "<p>Quem recebe um salário de R$$meuSalario ganha <strong> $quantSalariosInt salários mínimos + </strong> R$$restoSalario </p>";
             
