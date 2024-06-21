@@ -10,17 +10,17 @@
     <?php 
         // Capturando os dados do Formulário Retroalimentado
         $dividendo = $_GET["dividendo"] ?? 0;
-        $divisor = $_GET["divisor"] ?? 0;
+        $divisor = $_GET["divisor"] ?? 1;
     ?>
     <main>
         <h1>Anatomia de uma Divisão</h1>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get"> 
 
             <label for="dividendo">Dividendo</label>
-            <input type="number" name="dividendo" id="dividendo" value="<?=$dividendo?>">
+            <input type="number" name="dividendo" id="dividendo" min="0" value="<?=$dividendo?>">
 
             <label for="divisor">Divisor</label>
-            <input type="number" name="divisor" id="divisor" value="<?=$divisor?>">
+            <input type="number" name="divisor" id="divisor" min="1" value="<?=$divisor?>">
 
             <input type="submit" value="Analisar">
 
@@ -29,12 +29,20 @@
     <section>
         <h2>Estrutura da Divisão</h2>
         <?php
-            $divisao = $dividendo / $divisor;
-            echo "<h1><strong>$dividendo / $divisor = $divisao</strong></h1>";
-            echo "<p>$dividendo ----> $divisor </p>";
-            echo "<p>Quociente da Divisão: " . floor($dividendo / $divisor) . "</p>";
-            echo "<p>Resto da Divisão: " . $dividendo % $divisor . "</p>";
+            $quociente = intdiv($dividendo, $divisor);
+            $resto = $dividendo % $divisor;
         ?>
+
+        <table class="divisao">
+            <tr>
+                <td><?=$dividendo?></td>
+                <td><?=$divisor?></td>
+            </tr>
+            <tr>
+                <td><?=$resto?></td>
+                <td><?=$quociente?></td>
+            </tr>
+        </table>
     </section>
 </body>
 </html>
