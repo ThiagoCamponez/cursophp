@@ -16,16 +16,16 @@
     ?>
     <main>
         <h2>Médias Aritméticas</h2>
-        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get"> 
+        <form action="<?php $_SERVER['PHP_SELF']; ?>" method="get"> 
 
             <label for="priValor">1° Valor (R$)</label>
-            <input type="number" name="priValor" id="priValor" value="<?=$priValor?>">
+            <input type="number" name="priValor" id="priValor" value="<?=$priValor?>" required>
 
             <label for="priPeso">1° Peso (R$)</label>
             <input type="number" name="priPeso" id="priPeso" value="<?=$priPeso?>">
 
             <label for="segValor">2° Valor (R$)</label>
-            <input type="number" name="segValor" id="segValor" value="<?=$segValor?>">
+            <input type="number" name="segValor" id="segValor" value="<?=$segValor?>" required>
 
             <label for="segPeso">2° Peso (R$)</label>
             <input type="number" name="segPeso" id="segPeso" value="<?=$segPeso?>">
@@ -35,16 +35,19 @@
         </form>
     </main>
     <section>
-        <h2>Cálculo das Médias</h2>
         <?php
             
             $mediaSimples  = ($priValor + $segValor) / 2;
-            $mediaPonderada = (($priValor * $priPeso) + ($segValor * $segPeso)) / ($priPeso + $segPeso);
-            echo "Analisando os valores $priValor e $segValor:";
-            
-            echo "<ul><li><p>A <strong>Média Aritimética Simples</strong> entre os valores é igual a <strong> ".number_format($mediaSimples, 2, ',', '.'). "</strong></p></li>";
-            echo "<li><p>A <strong>Média Aritimética Ponderada</strong> entre os valores é igual a <strong> ".number_format($mediaPonderada, 2, ',', '.'). "</strong></p></li></ul>";
+            $mediaPonderada = ($priValor * $priPeso + $segValor * $segPeso) / ($priPeso + $segPeso);
         ?>
+        <h2>Cálculo das Médias</h2>
+        <p>Analisando os valores <?=$priValor?> e <?= $segValor?>:</p>
+        <ul>
+            <li>A <strong>Média Aritimética Simples</strong> entre os valores é igual a <?=number_format($mediaSimples, 2, ',', '.')?>.</li>
+            <li>A <strong>Média Aritimética Ponderada</strong> com os pesos <?=$priPeso?> e <?=$segPeso?> é igual a <?=number_format($mediaPonderada, 2, ',', '.')?>.</li>
+        </ul>
+        
+
     </section>
 </body>
 </html>
