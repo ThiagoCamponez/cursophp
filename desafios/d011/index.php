@@ -9,42 +9,44 @@
 <body>
     <?php 
         // Capturando os dados do Formulário Retroalimentado
-        $preçoProduto = $_GET["preçoProduto"] ?? 0;
-        $percReajuste = $_GET["percReajuste"] ?? 0;
+        $preçoProduto = $_REQUEST["preçoProduto"] ?? 0;
+        $percReajuste = $_REQUEST["percReajuste"] ?? 0;
     ?>
     <main>
         <h2>Reajustador de Preços</h2>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get"> 
 
             <label for="preçoProduto">Preço do Produto (R$)</label>
-            <input type="number" name="preçoProduto" id="preçoProduto" value="<?=$preçoProduto?>">
 
-            <label for="percReajuste">Qual será o percentual de reajuste? (<span id="percentual"><?=$percReajuste?>%</span>)</label>
-            <input type="range" min="0" max="100" class="slider" name="percReajuste" id="percReajuste" value="<?=$priPeso?>">
+            <input type="number" name="preçoProduto" id="preçoProduto" min= "0.10" step="0.10" value="<?=$preçoProduto?>">
 
+            <label for="percReajuste">Qual será o percentual de reajuste? (<strong><span id="p"><?=$percReajuste?></span>%</strong>)</label>
+
+            <input type="range" name="percReajuste" id="percReajuste" min="0" max="100" step="1" oninput="mudaValor()">
 
             <input type="submit" value="Reajustar">
 
         </form>
     </main>
-    <section>
-        <h2>Resultado</h2>
-        <?php
+    <?php
             
-            $preçoReajustado = $preçoProduto + ($preçoProduto * $percReajuste / 100);
-
-            echo "O produto que custava R$ ".number_format($preçoProduto, 2, ',', '.'). ", com <strong> $percReajuste% de aumento </strong>vai passar a custar <strong>R$ ".number_format($preçoReajustado, 2, ',', '.'). "</strong> a partir de agora.";
+            $aumento = $preçoProduto * $percReajuste / 100;
+            $novoPreço = $preçoProduto + $aumento;
             
         ?>
+    <section>
+        <h2>Resultado do Reajuste</h2>
+        <p>O produto que custava R$<?=$preçoProduto?>, com <strong><?=$percReajuste?>%</strong> de aumento, vai passar a custar <strong>R$<?=number_format($novoPreço, 2, ',', '.')?></strong> a partir de agora.</p>
+        
     </section>
     <script>
-        // JavaScript para atualizar o valor da porcentagem em tempo real
-        const slider = document.getElementById('percReajuste');
-        const percentual = document.getElementById('percentual');
+        
+        mudaValor();
 
-        slider.oninput = function() {
-            percentual.textContent = this.value;
+        function mudaValor(){
+            p.innerText = percReajuste.value;
         }
+
     </script>
 </body>
 </html>

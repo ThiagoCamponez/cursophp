@@ -8,19 +8,19 @@
 </head>
 <body>
     <?php 
-        // Capturando os dados do Formulário Retroalimentado
-        $anoNasc = $_GET["anoNasc"] ?? 0;
-        $anoFinal = $_GET["anoFinal"] ?? 0;
+        $anoAtual = date('Y');
+        $anoNasc = $_GET["anoNasc"] ?? 2000;
+        $anoFinal = $_GET["anoFinal"] ?? $anoAtual;
     ?>
     <main>
         <h2>Calculando a sua Idade</h2>
-        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get"> 
+        <form action="<?php $_SERVER['PHP_SELF']; ?>" method="get"> 
 
             <label for="anoNasc">Em que ano você nasceu?</label>
-            <input type="number" name="anoNasc" id="anoNasc" value="<?=$priValor?>">
+            <input type="number" name="anoNasc" id="anoNasc" min="1900" max="<?=$anoAtual?>" value="<?=$anoNasc?>">
 
-            <label for="anoFinal">Quer saber sua Idade em que ano? (atualmente estamos em <?=date('Y') ?>)</label>
-            <input type="number" name="anoFinal" id="anoFinal" value="<?=$priPeso?>">
+            <label for="anoFinal">Quer saber sua Idade em que ano? (atualmente estamos em <?=$anoAtual?>)</label>
+            <input type="number" name="anoFinal" id="anoFinal" value="<?=$anoFinal?>">
 
 
             <input type="submit" value="Qual será minha idade?">
